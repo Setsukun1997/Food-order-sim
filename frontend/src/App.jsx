@@ -88,7 +88,6 @@ function AppWrapper() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/home" element={
           <>
-            <Route path="/" element={<Menu />} />
             <Home onAdd={handleAdd} />
             <Cart
               cartItems={cartItems}
