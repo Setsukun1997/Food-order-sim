@@ -1,6 +1,6 @@
 import express from 'express';
 import Order from '../models/Order.js';
-import { verfyToken  } fron '../middleware/auth.js';
+import { verfyToken  } from '../middleware/auth.js';
 import { verifyAdmin } from '../middleware/auth.js';
 
 const router = express.Router();
