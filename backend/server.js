@@ -15,6 +15,10 @@ app.use(express.json());
 app.use('/api/menu', menuRoutes);
 app.use('/api/order', orderRoutes);
 
+app.get('/', (req, res) => {
+  res.send('Backend is running ✅');
+});
+
 mongoose.connect(process.env.MONGO_URI)
   .then(() => {
     app.listen(process.env.PORT, () => {
