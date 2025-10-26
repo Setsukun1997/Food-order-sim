@@ -7,7 +7,7 @@ export default function Home({ onAdd }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('https://food-order-sim-backend.onrender.com/api/menu')
+    fetch('https://food-order-backend-b401.onrender.com/api/menu')
       .then(res => {
         if (!res.ok) throw new Error('Failed to fetch menu');
         return res.json();
