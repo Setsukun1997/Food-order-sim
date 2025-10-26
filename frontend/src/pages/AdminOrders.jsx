@@ -50,8 +50,6 @@ export default function AdminOrders({ token }) {
         </div>
       ))}
     </div>
-<button onClick={() => updateStatus(order._id, 'กำลังทำ')}>รับออเดอร์</button>
-<button onClick={() => updateStatus(order._id, 'จัดส่งแล้ว')}>จัดส่งแล้ว</button>
   );
 }
 
