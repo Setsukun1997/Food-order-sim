@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export default function Login({ onLogin }) {
   const [username, setUsername] = useState('');
@@ -6,7 +7,6 @@ export default function Login({ onLogin }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
       const res = await fetch('https://food-order-sim-backend.onrender.com/api/auth/login', {
         method: 'POST',
@@ -15,14 +15,12 @@ export default function Login({ onLogin }) {
       });
 
       const data = await res.json();
-
       if (!res.ok) throw new Error(data.error || 'Login failed');
 
       localStorage.setItem('token', data.token);
       localStorage.setItem('role', data.role);
-
       alert('✅ เข้าสู่ระบบสำเร็จ');
-      onLogin(data.role); 
+      onLogin(data.role);
     } catch (err) {
       alert('❌ เข้าสู่ระบบไม่สำเร็จ');
       console.error(err);
@@ -51,6 +49,9 @@ export default function Login({ onLogin }) {
         />
         <button type="submit" style={styles.button}>เข้าสู่ระบบ</button>
       </form>
+      <p style={styles.signupText}>
+        ยังไม่มีบัญชี? <Link to="/signup" style={styles.signupLink}>สมัครสมาชิก</Link>
+      </p>
     </div>
   );
 }
@@ -84,5 +85,15 @@ const styles = {
     border: 'none',
     borderRadius: '6px',
     cursor: 'pointer'
+  },
+  signupText: {
+    marginTop: '16px',
+    fontSize: '14px',
+    color: '#555'
+  },
+  signupLink: {
+    color: '#007bff',
+    textDecoration: 'none',
+    fontWeight: 'bold'
   }
 };
