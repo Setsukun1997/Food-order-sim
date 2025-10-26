@@ -1,13 +1,23 @@
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
 import Home from './pages/Home';
 import Cart from './components/Cart';
 import Login from './pages/Login';
+import Signup from './pages/Signup';
 import AdminOrders from './pages/AdminOrders';
 
-export default function App() {
+function AppWrapper() {
   const [cartItems, setCartItems] = useState([]);
-  const [role, setRole] = useState(localStorage.getItem('role') || null);
   const [token, setToken] = useState(localStorage.getItem('token') || null);
+  const [role, setRole] = useState(localStorage.getItem('role') || null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const storedToken = localStorage.getItem('token');
+    const storedRole = localStorage.getItem('role');
+    if (storedToken) setToken(storedToken);
+    if (storedRole) setRole(storedRole);
+  }, []);
 
   const handleAdd = (item) => {
     const index = cartItems.findIndex(i => i._id === item._id);
@@ -26,23 +36,22 @@ export default function App() {
     setCartItems(updated);
   };
 
-  const handleConfirmOrder = async (items, total) => {
+  const handleConfirmOrder = async () => {
     try {
       const res = await fetch('https://food-order-sim-backend.onrender.com/api/order', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          ...(token && { Authorization: `Bearer ${token}` })
+          Authorization: `Bearer ${token}`
         },
         body: JSON.stringify({
-          items,
-          total,
+          items: cartItems,
+          total: cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0),
           timestamp: new Date().toISOString()
         })
       });
 
       if (!res.ok) throw new Error('สั่งอาหารไม่สำเร็จ');
-
       alert('✅ สั่งอาหารสำเร็จ!');
       setCartItems([]);
     } catch (err) {
@@ -51,43 +60,53 @@ export default function App() {
     }
   };
 
+  const handleLoginSuccess = (receivedRole) => {
+    const receivedToken = localStorage.getItem('token');
+    setToken(receivedToken);
+    setRole(receivedRole);
+    if (receivedRole === 'admin') {
+      navigate('/admin');
+    } else {
+      navigate('/home');
+    }
+  };
+
   const handleLogout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('role');
     setToken(null);
     setRole(null);
-  };
-
-  const handleLoginSuccess = (receivedToken, receivedRole) => {
-    localStorage.setItem('token', receivedToken);
-    localStorage.setItem('role', receivedRole);
-    setToken(receivedToken);
-    setRole(receivedRole);
+    navigate('/');
   };
 
   return (
     <div style={styles.container}>
       <h1 style={styles.title}>🍽️ ระบบสั่งอาหาร</h1>
-
-      {!token ? (
-        <Login onLogin={handleLoginSuccess} />
-      ) : role === 'admin' ? (
-        <>
-          <button onClick={handleLogout} style={styles.logout}>ออกจากระบบ</button>
-          <AdminOrders token={token} />
-        </>
-      ) : (
-        <>
-          <button onClick={handleLogout} style={styles.logout}>ออกจากระบบ</button>
-          <Home onAdd={handleAdd} />
-          <Cart
-            cartItems={cartItems}
-            onRemove={handleRemove}
-            onConfirm={handleConfirmOrder}
-          />
-        </>
-      )}
+      {token && <button onClick={handleLogout} style={styles.logout}>ออกจากระบบ</button>}
+      <Routes>
+        <Route path="/" element={<Login onLogin={handleLoginSuccess} />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/home" element={
+          <>
+            <Home onAdd={handleAdd} />
+            <Cart
+              cartItems={cartItems}
+              onRemove={handleRemove}
+              onConfirm={handleConfirmOrder}
+            />
+          </>
+        } />
+        <Route path="/admin" element={<AdminOrders token={token} />} />
+      </Routes>
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <AppWrapper />
+    </BrowserRouter>
   );
 }
 
