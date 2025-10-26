@@ -33,8 +33,6 @@ export default function AdminOrders({ token }) {
   if (orders.length === 0) return <p>📭 ยังไม่มีคำสั่งซื้อ</p>;
 
   return (
-    <button onClick={() => updateStatus(order._id, 'กำลังทำ')}>รับออเดอร์</button>
-<button onClick={() => updateStatus(order._id, 'จัดส่งแล้ว')}>จัดส่งแล้ว</button>
     <div style={styles.container}>
       <h2 style={styles.title}>📋 คำสั่งซื้อทั้งหมด</h2>
       {orders.map((order) => (
@@ -52,6 +50,8 @@ export default function AdminOrders({ token }) {
         </div>
       ))}
     </div>
+<button onClick={() => updateStatus(order._id, 'กำลังทำ')}>รับออเดอร์</button>
+<button onClick={() => updateStatus(order._id, 'จัดส่งแล้ว')}>จัดส่งแล้ว</button>
   );
 }
 
