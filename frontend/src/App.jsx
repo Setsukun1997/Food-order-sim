@@ -5,6 +5,26 @@ import Cart from './components/Cart';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import AdminOrders from './pages/AdminOrders';
+import Menu from './components/Menu';
+import Header from './components/Header';
+import Footer from './components/Footer';
+
+function App() {
+  return (
+    <Router>
+      <div>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Menu />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/cart" element={<Cart />} />
+        </Routes>
+        <Footer />
+      </div>
+    </Router>
+  );
+}
 
 function AppWrapper() {
   const [cartItems, setCartItems] = useState([]);
