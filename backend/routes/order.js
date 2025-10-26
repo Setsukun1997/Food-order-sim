@@ -4,7 +4,7 @@ import { verifyAdmin } from '../middleware/auth.js';
 
 const router = express.Router();
 
-router.post('/', async (req, res) => {
+router.post('/', verifyToken async (req, res) => {
   try {
     const { items, total, timestamp } = req.body;
 
