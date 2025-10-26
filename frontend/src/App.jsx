@@ -6,7 +6,7 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import AdminOrders from './pages/AdminOrders';
 
-function App() {
+function Appwarp() {
   return (
     <Router>
       <div>
