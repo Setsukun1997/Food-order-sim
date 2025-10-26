@@ -1,5 +1,5 @@
 import React from 'react';
-import { menuItems } from '../data/mockData';
+import { menuItems } from '../../data/mockData';
 import MenuItem from '../components/MenuItem';
 
 export default function Home({ onAdd }) {
