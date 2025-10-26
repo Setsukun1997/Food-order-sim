@@ -6,7 +6,7 @@ import Cart from './components/Cart';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import AdminOrders from './pages/AdminOrders';
-import Menu fron './components/MenuItem' ;
+import Menu from './components/MenuItem' ;
 
 function AppWrapper() {
   const [cartItems, setCartItems] = useState([]);
