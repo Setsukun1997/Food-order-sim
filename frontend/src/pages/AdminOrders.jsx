@@ -8,7 +8,7 @@ export default function AdminOrders({ token }) {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const res = await fetch('https://food-order-sim-backend.onrender.com/api/order', {
+        const res = await fetch('https://food-order-backend-b401.onrender.com/api/order', {
           headers: {
             Authorization: `Bearer ${token}`
           }
