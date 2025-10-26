@@ -38,6 +38,11 @@ router.get('/', verifyAdmin, async (req, res) => {
   } catch (err) {
     console.error('❌ เกิดข้อผิดพลาดในการดึงคำสั่งซื้อ:', err);
     res.status(500).json({ error: 'ไม่สามารถดึงคำสั่งซื้อได้!' });
+router.put('/:id/status', verifyAdmin, async (req, res) => {
+  const { status } = req.body;
+  const order = await Order.findByIdAndUpdate(req.params.id, { status }, { new: true });
+  res.json(order);
+});
   }
 });
 
