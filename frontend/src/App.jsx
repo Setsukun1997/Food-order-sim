@@ -6,17 +6,7 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import AdminOrders from './pages/AdminOrders';
 
-function Appwarp() {
-  return (
-    <Router>
-      <div>
-        <Header />
-        <Routes>
-          <Route path="/" element={<Menu />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/cart" element={<Cart />} />
-        </Route>
+function AppWrapper() {
   const [cartItems, setCartItems] = useState([]);
   const [token, setToken] = useState(localStorage.getItem('token') || null);
   const [role, setRole] = useState(localStorage.getItem('role') || null);
@@ -96,6 +86,7 @@ function Appwarp() {
       <Routes>
         <Route path="/" element={<Login onLogin={handleLoginSuccess} />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/" element={<Menu />} />
         <Route path="/home" element={
           <>
             <Home onAdd={handleAdd} />
