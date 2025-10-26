@@ -6,8 +6,17 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import AdminOrders from './pages/AdminOrders';
 
-function AppWrapper() {
-<Route path="/" element={<Menu />} />
+function App() {
+  return (
+    <Router>
+      <div>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Menu />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/cart" element={<Cart />} />
+        </Route>
   const [cartItems, setCartItems] = useState([]);
   const [token, setToken] = useState(localStorage.getItem('token') || null);
   const [role, setRole] = useState(localStorage.getItem('role') || null);
