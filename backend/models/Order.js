@@ -6,7 +6,7 @@ const orderSchema = new mongoose.Schema({
   timestamp: Date,
   status: { type: String, default: 'รอรับออเดอร์' } 
 });
-  createdAt: { type: Date, default: Date.now }
+  createdAt: { type: Date, default: () => Date.now() }
 });
 
 export default mongoose.model('Order', orderSchema);
