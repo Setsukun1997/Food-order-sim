@@ -8,7 +8,7 @@ export default function Login({ onLogin }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch('https://food-order-sim-backend.onrender.com/api/auth/login', {
+      const res = await fetch('https://food-order-backend-b401.onrender.com/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password })
