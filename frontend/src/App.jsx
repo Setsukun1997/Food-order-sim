@@ -7,6 +7,7 @@ import Signup from './pages/Signup';
 import AdminOrders from './pages/AdminOrders';
 
 function AppWrapper() {
+<Route path="/" element={<Menu />} />
   const [cartItems, setCartItems] = useState([]);
   const [token, setToken] = useState(localStorage.getItem('token') || null);
   const [role, setRole] = useState(localStorage.getItem('role') || null);
