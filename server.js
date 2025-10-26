@@ -1,15 +1,24 @@
 import express from 'express';
+import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
 
+import menuRoutes from './routes/menu.js';
+import orderRoutes from './routes/order.js';
+
 dotenv.config();
 const app = express();
+
 app.use(cors());
 app.use(express.json());
 
-app.get('/api/ping', (req, res) => {
-  res.json({ message: 'pong' });
-});
+app.use('/api/menu', menuRoutes);
+app.use('/api/order', orderRoutes);
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => {
+    app.listen(process.env.PORT, () => {
+      console.log(`Server running on port ${process.env.PORT}`);
+    });
+  })
+  .catch(err => console.error(err));
