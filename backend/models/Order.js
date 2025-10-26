@@ -1,8 +1,11 @@
 import mongoose from 'mongoose';
 
 const orderSchema = new mongoose.Schema({
-  items: [{ name: String, price: Number }],
+  items: Array,
   total: Number,
+  timestamp: Date,
+  status: { type: String, default: 'รอรับออเดอร์' } 
+});
   createdAt: { type: Date, default: Date.now }
 });
 
