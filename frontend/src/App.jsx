@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
+<Route path="/" element={<Menu />} />
 import Home from './pages/Home';
 import Cart from './components/Cart';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import AdminOrders from './pages/AdminOrders';
+import Menu fron './pages/Menu' ;
 
 function AppWrapper() {
   const [cartItems, setCartItems] = useState([]);
