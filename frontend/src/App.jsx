@@ -38,7 +38,7 @@ function AppWrapper() {
 
   const handleConfirmOrder = async () => {
     try {
-      const res = await fetch('https://food-order-sim-backend.onrender.com/api/order', {
+      const res = await fetch('https://food-order-backend-b401.onrender.com/api/order', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
