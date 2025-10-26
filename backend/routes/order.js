@@ -1,48 +1,41 @@
 import express from 'express';
-import Order from '../models/Order.js';
-import { verfyToken  } from '../middleware/auth.js';
-import { verifyAdmin } from '../middleware/auth.js';
+import { verifyToken, verifyAdmin } from '../middleware/auth.js';
+import Order from '../models/order.js';
 
 const router = express.Router();
 
-router.post('/', verifyToken async (req, res) => {
+router.post('/', verifyToken, async (req, res) => {
   try {
-    const { items, total, timestamp } = req.body;
-
-    if (!items || !Array.isArray(items) || items.length === 0) {
-      return res.status(400).json({ error: 'ไม่พบรายการอาหาร!' });
-    }
-
-    if (typeof total !== 'number' || total <= 0) {
-      return res.status(400).json({ error: 'ยอดรวมไม่ถูกต้อง!' });
-    }
-
-    const order = new Order({ items, total, timestamp });
-    await order.save();
-
-    res.status(201).json({
-      message: '✅ บันทึกคำสั่งซื้อสำเร็จ',
-      orderId: order._id,
-      createdAt: order.timestamp
-    });
+    const newOrder = new Order(req.body);
+    const savedOrder = await newOrder.save();
+    res.status(201).json(savedOrder);
   } catch (err) {
-    console.error('❌ เกิดข้อผิดพลาดในการสร้างคำสั่งซื้อ:', err);
-    res.status(500).json({ error: 'เกิดข้อผิดพลาดในเซิร์ฟเวอร์!' });
+    console.error('❌ Error creating order:', err);
+    res.status(500).json({ error: 'Failed to create order' });
   }
 });
 
 router.get('/', verifyAdmin, async (req, res) => {
   try {
-    const orders = await Order.find().sort({ timestamp: -1 });
-    res.json(orders);
+    const orders = await Order.find();
+    res.status(200).json(orders);
   } catch (err) {
-    console.error('❌ เกิดข้อผิดพลาดในการดึงคำสั่งซื้อ:', err);
-    res.status(500).json({ error: 'ไม่สามารถดึงคำสั่งซื้อได้!' });
-router.put('/:id/status', verifyAdmin, async (req, res) => {
-  const { status } = req.body;
-  const order = await Order.findByIdAndUpdate(req.params.id, { status }, { new: true });
-  res.json(order);
+    console.error('❌ Error fetching orders:', err);
+    res.status(500).json({ error: 'Failed to fetch orders' });
+  }
 });
+
+router.put('/:id/status', verifyAdmin, async (req, res) => {
+  try {
+    const updatedOrder = await Order.findByIdAndUpdate(
+      req.params.id,
+      { status: req.body.status },
+      { new: true }
+    );
+    res.status(200).json(updatedOrder);
+  } catch (err) {
+    console.error('❌ Error updating order status:', err);
+    res.status(500).json({ error: 'Failed to update order status' });
   }
 });
 
