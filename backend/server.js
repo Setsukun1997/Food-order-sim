@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 
 import menuRoutes from './routes/menu.js';
 import orderRoutes from './routes/order.js';
+import authRoutes from './routes/auth.js';
 
 dotenv.config();
 const app = express();
@@ -14,6 +15,7 @@ app.use(express.json());
 
 app.use('/api/menu', menuRoutes);
 app.use('/api/order', orderRoutes);
+app.use('/api/auth', authRoutes);
 
 app.get('/', (req, res) => {
   res.send('Backend is running ✅');
