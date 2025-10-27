@@ -1,7 +1,7 @@
 import '../styles/Menu.css';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import MenuItem from '../components/MenuItem';
+import MenuItem from '../data/MockData';
 
 export default function Menu() {
   const [items, setItems] = useState([]);
