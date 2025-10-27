@@ -8,7 +8,7 @@ function Login({ setIsLoggedIn, setUserData }) {
 
   const handleLogin = async () => {
     try {
-      const response = await fetch('https://food-order-backend-bf01.onrender.com/api/login', {
+      const response = await fetch('https://food-order-backend-b401.onrender.com/api/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password })
@@ -54,5 +54,45 @@ function Login({ setIsLoggedIn, setUserData }) {
     </div>
   );
 }
-
+const styles = {
+  container: {
+    maxWidth: '400px',
+    margin: '40px auto',
+    padding: '20px',
+    backgroundColor: '#fff',
+    borderRadius: '8px',
+    boxShadow: '0 2px 6px rgba(0,0,0,0.1)',
+    textAlign: 'center'
+  },
+  form: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '12px'
+  },
+  input: {
+    padding: '10px',
+    fontSize: '16px',
+    borderRadius: '6px',
+    border: '1px solid #ccc'
+  },
+  button: {
+    padding: '10px',
+    fontSize: '16px',
+    backgroundColor: '#28a745',
+    color: '#fff',
+    border: 'none',
+    borderRadius: '6px',
+    cursor: 'pointer'
+  },
+  signupText: {
+    marginTop: '16px',
+    fontSize: '14px',
+    color: '#555'
+  },
+  signupLink: {
+    color: '#007bff',
+    textDecoration: 'none',
+    fontWeight: 'bold'
+  }
+};
 export default Login;
