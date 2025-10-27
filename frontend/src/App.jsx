@@ -19,7 +19,7 @@ function App() {
     <Router>
       <Routes>
 
-        <Route path="/" element={isLoggedIn() ? <Menu /> : <Navigate to="/login" />} />
+        <Route path="/" element={<Menu />} />
 
         <Route path="/login" element={<Login onLogin={handleLogin} />} />
 
