@@ -1,30 +1,30 @@
-import '../styles/Menu.css';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import MenuItem from '../data/MockData';
+import { menuItems } from '../data/MockData';
+import '../styles/Menu.css';
 
 export default function Menu() {
-  const [items, setItems] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (!token) {
       navigate('/login');
-      return;
     }
-
-    fetch('https://food-order-backend-b401.onrender.com/api/menu')
-      .then(res => res.json())
-      .then(data => setItems(data));
-  }, []);
+  }, [navigate]);
 
   return (
     <div className="menu-container">
       <h2 className="menu-title">เมนูอาหาร</h2>
       <div className="menu-grid">
-        {items.map(item => (
-          <MenuItem key={item._id} item={item} />
+        {menuItems.map(item => (
+          <div key={item.id} className="menu-card">
+            <img src={item.image} alt={item.name} className="menu-image" />
+            <div className="menu-info">
+              <h3>{item.name}</h3>
+              <p>{item.price} บาท</p>
+            </div>
+          </div>
         ))}
       </div>
     </div>
