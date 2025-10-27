@@ -21,7 +21,7 @@ export default function Signup() {
   };
 
   return (
-    <div>
+    <div className="signup-container">
       <h2>สมัครสมาชิก</h2>
       <input placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} />
       <input placeholder="Password" type="password" value={password} onChange={e => setPassword(e.target.value)} />
