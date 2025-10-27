@@ -28,6 +28,9 @@ export default function Login() {
   };
 
   return (
+    <div className="login-container">
+  </div>
+);
     <div>
       <h2>เข้าสู่ระบบ</h2>
       <input value={email} onChange={e => setEmail(e.target.value)} placeholder="Email" />
