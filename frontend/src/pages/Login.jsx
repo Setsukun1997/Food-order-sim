@@ -16,7 +16,6 @@ export default function Login({ onLogin }) {
 
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || 'Login failed');
-        navigate('/');
       localStorage.setItem('token', data.token);
       localStorage.setItem('role', data.role);
       alert('✅ เข้าสู่ระบบสำเร็จ');
