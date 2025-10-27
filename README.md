@@ -29,10 +29,18 @@ Food-order-sim ระบบจำลองการสั่งอาหาร�
 
 🔗 ลิงก์ที่เกี่ยวข้อง
 
-🌐 Frontend (Static Site)
+🌐 Frontend https://food-order-sim.onrender.com
 
-🔧 Backend (Web Service)
+🔧 Backend [(Web Service)](https://food-order-backend-b401.onrender.com)
 
-📁 auth.js บน GitHub
+📁 auth.js บน GitHub https://github.com/Setsukun1997/Food-order-sim/blob/main/backend/routes/auth.js
 
-📄 Signup.jsx บน GitHub
+📄 Signup.jsx บน GitHub  https://github.com/Setsukun1997/Food-order-sim/blob/main/frontend/src/pages/Signup.jsx
+
+🧑‍💻 ผู้พัฒนา
+
+Suthat Punyasirisoonthorn (Setsukun1997) นักพัฒนา full-stack ที่เริ่มต้นจากศูนย์ด้วยมือถือเครื่องเดียว เชี่ยวชาญการ debug, deploy และแก้ปัญหาแบบมืออาชีพ พร้อมสร้างระบบที่ใช้งานได้จริง และเข้าใจทุกจุดที่ทำให้ระบบพัง
+
+🎯 เป้าหมายของโปรเจค
+
+ใช้เป็นผลงานสมัครงานสาย full-stack developer แสดงให้เห็นถึงความสามารถในการพัฒนาและ deploy ระบบจริง สื่อถึงความตั้งใจ ความอดทน และความเข้าใจระบบแบบลึกซึ้ง
