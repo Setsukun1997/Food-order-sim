@@ -1,4 +1,4 @@
-import './styles/AdminOrders.css';
+import '../styles/AdminOrders.css';
 export default function AdminOrders() {
   return (
     <div className="admin-container">
