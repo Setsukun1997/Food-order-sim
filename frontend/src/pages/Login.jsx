@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom'; // ✅ import Link ด้วย
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -22,12 +22,25 @@ export default function Login() {
   };
 
   return (
-    <div>
+    <div style={{ padding: '20px', maxWidth: '400px', margin: '0 auto' }}>
       <h2>เข้าสู่ระบบ</h2>
-      <input placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} />
-      <input placeholder="Password" type="password" value={password} onChange={e => setPassword(e.target.value)} />
-      <button onClick={handleLogin}>เข้าสู่ระบบ</button>
-      <p>ยังไม่มีบัญชีใช่ไหม? <Link to="/signup">สมัครสมาชิก</Link></p>
+      <input
+        placeholder="Email"
+        value={email}
+        onChange={e => setEmail(e.target.value)}
+        style={{ display: 'block', marginBottom: '10px', width: '100%' }}
+      />
+      <input
+        placeholder="Password"
+        type="password"
+        value={password}
+        onChange={e => setPassword(e.target.value)}
+        style={{ display: 'block', marginBottom: '10px', width: '100%' }}
+      />
+      <button onClick={handleLogin} style={{ width: '100%' }}>เข้าสู่ระบบ</button>
+      <p style={{ marginTop: '10px', textAlign: 'center' }}>
+        ยังไม่มีบัญชีใช่ไหม? <Link to="/signup">สมัครสมาชิก</Link>
+      </p>
     </div>
   );
 }
