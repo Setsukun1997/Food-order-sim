@@ -1,60 +1,63 @@
 import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-function Login({ setIsLoggedIn, setUserData }) {
-  const [email, setEmail] = useState('');
+export default function Login({ onLogin }) {
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate();
 
-  const handleLogin = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     try {
-      const response = await fetch('https://food-order-backend-b401.onrender.com/api/login', {
+      const res = await fetch('https://food-order-backend-b401.onrender.com/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password })
+        body: JSON.stringify({ username, password })
       });
 
-      const data = await response.json();
-
-      if (data.success) {
-        setIsLoggedIn(true);
-        setUserData(data.user);
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Login failed');
         localStorage.setItem('user', JSON.stringify(data.user));
 
         navigate('/');
-      } else {
-        alert('เข้าสู่ระบบไม่สำเร็จ');
-      }
-    } catch (error) {
-      console.error('Login error:', error);
-      alert('เกิดข้อผิดพลาดในการเข้าสู่ระบบ');
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('role', data.role);
+      alert('✅ เข้าสู่ระบบสำเร็จ');
+      onLogin(data.role);
+    } catch (err) {
+      alert('❌ เข้าสู่ระบบไม่สำเร็จ');
+      console.error(err);
     }
   };
 
   return (
-    <div className="login-container">
-      <h2>เข้าสู่ระบบ</h2>
-      <input
-        type="email"
-        placeholder="อีเมล"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <input
-        type="password"
-        placeholder="รหัสผ่าน"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button onClick={handleLogin}>เข้าสู่ระบบ</button>
-
-      {/* ✅ ปุ่มลงทะเบียน */}
-      <p>
-        ยังไม่มีบัญชี? <Link to="/signup">สมัครสมาชิก</Link>
+    <div style={styles.container}>
+      <h2>🔐 เข้าสู่ระบบ</h2>
+      <form onSubmit={handleSubmit} style={styles.form}>
+        <input
+          type="text"
+          placeholder="ชื่อผู้ใช้"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          required
+          style={styles.input}
+        />
+        <input
+          type="password"
+          placeholder="รหัสผ่าน"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+          style={styles.input}
+        />
+        <button type="submit" style={styles.button}>เข้าสู่ระบบ</button>
+      </form>
+      <p style={styles.signupText}>
+        ยังไม่มีบัญชี? <Link to="/signup" style={styles.signupLink}>สมัครสมาชิก</Link>
       </p>
     </div>
   );
 }
+
 const styles = {
   container: {
     maxWidth: '400px',
@@ -96,4 +99,3 @@ const styles = {
     fontWeight: 'bold'
   }
 };
-export default Login;
