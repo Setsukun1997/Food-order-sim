@@ -27,6 +27,7 @@ export default function Login() {
       <input placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} />
       <input placeholder="Password" type="password" value={password} onChange={e => setPassword(e.target.value)} />
       <button onClick={handleLogin}>เข้าสู่ระบบ</button>
+      <p>ยังไม่มีบัญชีใช่ไหม? <Link to="/signup">สมัครสมาชิก</Link></p>
     </div>
   );
 }
