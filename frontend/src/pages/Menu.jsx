@@ -14,7 +14,7 @@ export default function Menu() {
       return;
     }
 
-    fetch('https://food-order-backend-8adl.onrender.com/api/menu')
+    fetch('https://food-order-backend-b401.onrender.com/api/menu')
       .then(res => res.json())
       .then(data => setItems(data));
   }, []);
