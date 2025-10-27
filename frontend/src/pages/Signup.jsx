@@ -7,26 +7,32 @@ export default function Signup() {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const handleSignup = async () => {
-    try {
-      const res = await fetch('https://food-order-backend-b401.onrender.com/api/auth/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password })
-      });
-      const data = await res.json();
-      console.log(data);
-      if (data.message === 'User registered') {
-        alert('สมัครสมาชิกสำเร็จ');
-        navigate('/login');
-      } else {
-        alert(data.error || 'สมัครสมาชิกไม่สำเร็จ');
-      }
-    } catch (err) {
-      console.error('Signup error:', err);
-      alert('เกิดข้อผิดพลาด');
+const handleSignup = async () => {
+  try {
+    const res = await fetch('https://food-order-backend-b401.onrender.com/api/auth/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password })
+    });
+
+    if (!res.ok) {
+      throw new Error(`HTTP error! status: ${res.status}`);
     }
-  };
+
+    const data = await res.json();
+    console.log(data);
+
+    if (data.message === 'User registered') {
+      alert('สมัครสมาชิกสำเร็จ');
+      navigate('/login');
+    } else {
+      alert(data.error || 'สมัครสมาชิกไม่สำเร็จ');
+    }
+  } catch (err) {
+    console.error('Signup error:', err);
+    alert('เกิดข้อผิดพลาด');
+  }
+};
 
   return (
     <div className="signup-container">
