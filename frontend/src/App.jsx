@@ -1,15 +1,14 @@
-import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import AdminOrders from './pages/AdminOrders';
 import Home from './pages/Home';
-import Menu from './components/MenuItem';
+import Menu from './components/Menu';
 import Cart from './components/Cart';
 
 function App() {
   const handleLogin = (role) => {
-    console.log('เข้าสู่ระบบด้วย role:', role);
+    console.log("User role:", role);
   };
 
   return (
@@ -18,9 +17,9 @@ function App() {
         <Route path="/" element={<Menu />} />
         <Route path="/login" element={<Login onLogin={handleLogin} />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/admin" element={<AdminOrders />} />
-        <Route path="/home" element={<Home />} />
+        <Route path="/adminOrders" element={<AdminOrders />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/home" element={<Home />} />
       </Routes>
     </Router>
   );
