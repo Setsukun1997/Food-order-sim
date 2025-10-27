@@ -21,8 +21,6 @@ export default function Login({ onLogin }) {
       localStorage.setItem('role', data.role);
       alert('✅ เข้าสู่ระบบสำเร็จ');
       onLogin(data.role);
-        localStorage.setItem('user', JSON.stringify(data.user));
-
         navigate('/');
     } catch (err) {
       alert('❌ เข้าสู่ระบบไม่สำเร็จ');
