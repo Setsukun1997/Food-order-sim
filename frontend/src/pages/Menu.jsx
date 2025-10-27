@@ -20,9 +20,9 @@ export default function Menu() {
   }, []);
 
   return (
-    <div>
-      <h2>เมนูอาหาร</h2>
-      <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+    <div className="menu-container">
+      <h2 className="menu-title">เมนูอาหาร</h2>
+      <div className="menu-grid">
         {items.map(item => (
           <MenuItem key={item._id} item={item} />
         ))}
