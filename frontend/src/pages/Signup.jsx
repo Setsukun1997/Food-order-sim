@@ -15,6 +15,7 @@ const handleSignup = async () => {
   body: JSON.stringify({ email, password })
 });
 
+
     if (!res.ok) {
       throw new Error(`HTTP error! status: ${res.status}`);
     }
