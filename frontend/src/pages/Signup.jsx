@@ -9,12 +9,11 @@ export default function Signup() {
 
 const handleSignup = async () => {
   try {
-    const res = await fetch('https://food-order-backend-b401.onrender.com/api/auth/register
-', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password })
-    });
+   const res = await fetch('https://food-order-backend-b401.onrender.com/api/auth/register', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ email, password })
+});
 
     if (!res.ok) {
       throw new Error(`HTTP error! status: ${res.status}`);
