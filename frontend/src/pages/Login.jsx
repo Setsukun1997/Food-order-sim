@@ -16,8 +16,6 @@ export default function Login({ onLogin }) {
 
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || 'Login failed');
-        localStorage.setItem('user', JSON.stringify(data.user));
-
         navigate('/');
       localStorage.setItem('token', data.token);
       localStorage.setItem('role', data.role);
