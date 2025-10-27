@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import AdminOrders from './pages/AdminOrders';
@@ -11,10 +11,14 @@ function App() {
     console.log("User role:", role);
   };
 
+  const isLoggedIn = () => {
+    return !!localStorage.getItem('token');
+  };
+
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Menu />} />
+        <Route path="/" element={isLoggedIn() ? <Menu /> : <Navigate to="/login" />} />
         <Route path="/login" element={<Login onLogin={handleLogin} />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/adminOrders" element={<AdminOrders />} />
