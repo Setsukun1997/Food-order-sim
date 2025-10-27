@@ -3,7 +3,7 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import AdminOrders from './pages/AdminOrders';
 import Home from './pages/Home';
-import Menu from './components/Menu';
+import Menu from './components/MenuItems';
 import Cart from './components/Cart';
 
 function App() {
