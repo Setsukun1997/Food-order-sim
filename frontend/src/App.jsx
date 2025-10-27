@@ -18,12 +18,20 @@ function App() {
   return (
     <Router>
       <Routes>
+
         <Route path="/" element={isLoggedIn() ? <Menu /> : <Navigate to="/login" />} />
+
         <Route path="/login" element={<Login onLogin={handleLogin} />} />
+
         <Route path="/signup" element={<Signup />} />
+
         <Route path="/adminOrders" element={<AdminOrders />} />
+
         <Route path="/cart" element={<Cart />} />
+
         <Route path="/home" element={<Home />} />
+
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </Router>
   );
