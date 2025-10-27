@@ -1,3 +1,4 @@
+import './styles/Menu.css';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MenuItem from '../components/MenuItem';
