@@ -23,7 +23,7 @@ const handleSignup = async () => {
     const data = await res.json();
     console.log(data);
 
-    if (data.message === 'User registered') {
+    if (data.message === 'สมัครสมาชิกสำเร็จ') {
       alert('สมัครสมาชิกสำเร็จ');
       navigate('/login');
     } else {
