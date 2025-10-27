@@ -21,7 +21,6 @@ function Login({ setIsLoggedIn, setUserData }) {
         setUserData(data.user);
         localStorage.setItem('user', JSON.stringify(data.user));
 
-        // ✅ Redirect ไปหน้าเมนู
         navigate('/');
       } else {
         alert('เข้าสู่ระบบไม่สำเร็จ');
