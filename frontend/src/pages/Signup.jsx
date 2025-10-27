@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import '../styles/signup.css';
+import '../styles/Signup.css';
 
 export default function Signup() {
   const [email, setEmail] = useState('');
