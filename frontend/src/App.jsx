@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
-<Route path="/" element={<Menu />} />
+ <Route path="/login" element={<Login onLogin={handleLogin} />} />
 import Home from './pages/Home';
 import Cart from './components/Cart';
 import Login from './pages/Login';
