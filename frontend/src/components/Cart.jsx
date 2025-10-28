@@ -69,18 +69,18 @@ cart.map((item, index) => (
       />
     )}
     <p>{item.name} - {item.price} บาท</p>
-   <button className="cart-button" onClick={() => handleQuantityChange(index, -1)}>-</button>
+   <button className="cart-controls button" onClick={() => handleQuantityChange(index, -1)}>-</button>
 <span style={{ margin: "0 10px" }}>{item.quantity}</span>
-<button className="cart-button" onClick={() => handleQuantityChange(index, 1)}>+</button>
-<button className="cart-button red" onClick={() => handleRemoveItem(index)}>ลบ</button>
+<button className="cart-controls button" onClick={() => handleQuantityChange(index, 1)}>+</button>
+<button className="cart-controls button remove-button red" onClick={() => handleRemoveItem(index)}>ลบ</button>
   </div>
 ))
       ) : (
         <p>ยังไม่มีรายการอาหารในตะกร้า</p>
       )}
       <h3>รวมทั้งหมด: {calculateTotal()} บาท</h3>
-     <button className="cart-button" onClick={handleConfirmOrder}>✅ ยืนยันคำสั่งซื้อ</button>
-<button className="cart-button" onClick={() => navigate("/")}>🍽️ กลับไปเลือกอาหารต่อ</button>
+     <button className="confirm-button" onClick={handleConfirmOrder}>✅ ยืนยันคำสั่งซื้อ</button>
+<button className="back-button" onClick={() => navigate("/")}>🍽️ กลับไปเลือกอาหารต่อ</button>
     </div>
   );
 }
