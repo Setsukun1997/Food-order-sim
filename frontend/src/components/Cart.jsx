@@ -5,12 +5,11 @@ function Cart({ cart, setCart }) {
     return cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
   };
 
-  const handleConfirmOrder = async () => {
-const orderData = {
-  items: cart,
-  total: cart.reduce((sum, item) => sum + item.price * item.quantity, 0)
-};
-
+const handleConfirmOrder = async () => {
+  const orderData = {
+    items: cart,
+    total: cart.reduce((sum, item) => sum + item.price * item.quantity, 0)
+  };
 
   try {
     const res = await fetch("https://food-order-backend-b401.onrender.com/api/order", {
