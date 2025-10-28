@@ -23,6 +23,10 @@ export default function Menu() {
             <div className="menu-info">
               <h3>{item.name}</h3>
               <p>{item.price} บาท</p>
+              <button className="menu-button" onClick={() => handleAddToCart(item)}>
+  เพิ่มลงตะกร้า
+</button>
+
             </div>
           </div>
         ))}
