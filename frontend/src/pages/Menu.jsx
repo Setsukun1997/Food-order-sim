@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { menuItems } from '../data/MockData';
+import { menuItems } from '../../data/MockData';
 import { handleAddToCart } from '../utils/cartUtils';
-import '../styles/Menu.css';
+import '../../styles/Menu.css';
 
 export default function Menu() {
   const navigate = useNavigate();
@@ -13,16 +13,21 @@ export default function Menu() {
       navigate('/login');
     }
   }, [navigate]);
-const handleLogout = () => {
-  localStorage.removeItem('token');
-  localStorage.removeItem('cart'); // ถ้าต้องการล้างตะกร้าด้วย
-  alert('ออกจากระบบแล้ว');
-  navigate('/login');
-};
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('cart');
+    alert('ออกจากระบบแล้ว');
+    navigate('/login');
+  };
 
   return (
     <div className="menu-container">
-      <h2 className="menu-title">เมนูอาหาร</h2>
+      <div className="menu-header">
+        <h2 className="menu-title">เมนูอาหาร</h2>
+        <button className="logout-button" onClick={handleLogout}>ออกจากระบบ</button>
+      </div>
+
       <div className="menu-grid">
         {menuItems.map(item => (
           <div key={item.id} className="menu-card">
@@ -30,16 +35,9 @@ const handleLogout = () => {
             <div className="menu-info">
               <h3>{item.name}</h3>
               <p>{item.price} บาท</p>
-              <button onClick={() => {
-  handleAddToCart(item);
-  alert(`${item.name} ถูกเพิ่มลงตะกร้าแล้ว`);
-}}>
-  เพิ่มลงตะกร้า
-</button>
-<button className="logout-button" onClick={handleLogout}>
-  ออกจากระบบ
-</button>
-
+              <button className="menu-button" onClick={() => handleAddToCart(item)}>
+                เพิ่มลงตะกร้า
+              </button>
             </div>
           </div>
         ))}
