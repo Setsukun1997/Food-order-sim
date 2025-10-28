@@ -13,6 +13,12 @@ export default function Menu() {
       navigate('/login');
     }
   }, [navigate]);
+const handleLogout = () => {
+  localStorage.removeItem('token');
+  localStorage.removeItem('cart'); // ถ้าต้องการล้างตะกร้าด้วย
+  alert('ออกจากระบบแล้ว');
+  navigate('/login');
+};
 
   return (
     <div className="menu-container">
