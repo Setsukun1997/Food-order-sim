@@ -13,7 +13,7 @@ mongoose.connect(process.env.MONGO_URI)
     process.exit(1);
   });
 app.use('/api/auth', require('./routes/auth')); 
-app.use('/api/orders', require('./routes/orders')); 
+app.use('/api/orders', require('./routes/order')); 
 app.get('/', (req, res) => {
   res.send('🍽️ Food-order backend is running!');
 });
