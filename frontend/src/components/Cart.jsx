@@ -16,7 +16,7 @@ function Cart({ cart, setCart }) {
 
       if (res.ok) {
         alert("ส่งคำสั่งซื้อสำเร็จแล้ว!");
-        setCart([]); // เคลียร์ตะกร้า
+        setCart([]);
       } else {
         alert("ขอโทษค่ะ backend ไม่ทำงานค่ะ");
       }
