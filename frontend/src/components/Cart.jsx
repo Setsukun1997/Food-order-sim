@@ -1,80 +1,59 @@
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { getCart, updateQuantity, removeItem } from '../utils/cartUtils';
-import '../styles/Cart.css';
+import React from 'react';
 
-export default function Cart() {
-  const [cart, setCart] = useState([]);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    setCart(getCart());
-  }, []);
-
-  const handleUpdate = (id, delta) => {
-    updateQuantity(id, delta);
-    setCart(getCart());
-  };
-
-  const handleRemove = (id) => {
-    removeItem(id);
-    setCart(getCart());
-  };
-
+function Cart({ cart, setCart }) {
   const handleConfirmOrder = async () => {
+    const orderData = {
+      items: cart,
+      total: cart.reduce((sum, item) => sum + item.price * item.quantity, 0)
+    };
+
     try {
       const res = await fetch("https://food-order-backend-b401.onrender.com/api/order", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify(orderData)
-});
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(orderData)
+      });
 
       if (res.ok) {
-        alert('สั่งซื้อสำเร็จแล้ว!');
-        localStorage.removeItem('cart');
-        navigate('/menu');
+        alert("ส่งคำสั่งซื้อสำเร็จแล้ว!");
+        setCart([]); // เคลียร์ตะกร้า
       } else {
-        alert('เกิดข้อผิดพลาดในการสั่งซื้อ');
+        alert("ขอโทษค่ะ backend ไม่ทำงานค่ะ");
       }
-    } catch (err) {
-      console.error(err);
-      alert('เชื่อมต่อ backend ไม่สำเร็จ');
+    } catch (error) {
+      console.error("Error:", error);
+      alert("เชื่อมต่อ backend ไม่สำเร็จ");
     }
   };
 
+  const handleRemoveItem = (index) => {
+    const updatedCart = [...cart];
+    updatedCart.splice(index, 1);
+    setCart(updatedCart);
+  };
+
+  const handleQuantityChange = (index, delta) => {
+    const updatedCart = [...cart];
+    updatedCart[index].quantity = Math.max(1, updatedCart[index].quantity + delta);
+    setCart(updatedCart);
+  };
+
   return (
-    <div className="cart-container">
+    <div>
       <h2>ตะกร้าของคุณ</h2>
-
-      <button className="back-button" onClick={() => navigate('/menu')}>
-        กลับไปสั่งอาหารต่อ
-      </button>
-
-      {cart.length === 0 ? (
-        <p>ยังไม่มีรายการอาหารในตะกร้า</p>
-      ) : (
-        <>
-          {cart.map(item => (
-            <div key={item.id} className="cart-item">
-              <img src={item.image} alt={item.name} />
-              <div className="cart-info">
-                <h3>{item.name}</h3>
-                <p>{item.price} บาท</p>
-                <div className="cart-controls">
-                  <button onClick={() => handleUpdate(item.id, -1)}>-</button>
-                  <span>{item.quantity}</span>
-                  <button onClick={() => handleUpdate(item.id, 1)}>+</button>
-                  <button onClick={() => handleRemove(item.id)}>ลบ</button>
-                </div>
-              </div>
-            </div>
-          ))}
-
-          <button className="confirm-button" onClick={handleConfirmOrder}>
-            ยืนยันคำสั่งซื้อ
-          </button>
-        </>
-      )}
+      {cart.map((item, index) => (
+        <div key={index}>
+          <p>{item.name} - {item.price} บาท</p>
+          <button onClick={() => handleQuantityChange(index, -1)}>-</button>
+          <span>{item.quantity}</span>
+          <button onClick={() => handleQuantityChange(index, 1)}>+</button>
+          <button onClick={() => handleRemoveItem(index)}>ลบ</button>
+        </div>
+      ))}
+      <button onClick={handleConfirmOrder}>ยืนยันคำสั่งซื้อ</button>
+      <button onClick={() => window.location.href = "/"}>กลับไปเลือกอาหารต่อ</button>
     </div>
   );
 }
+
+export default Cart;
