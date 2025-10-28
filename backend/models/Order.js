@@ -1,10 +1,12 @@
 const mongoose = require('mongoose');
 
 const itemSchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  price: { type: Number, required: true },
-  quantity: { type: Number, required: true },
-  image: { type: String, required: false }
+  name: String,
+  price: Number,
+  quantity: Number,
+  image: String
+}, { _id: false }); 
+
 });
 
 const orderSchema = new mongoose.Schema({
