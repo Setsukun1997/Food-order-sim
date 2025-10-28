@@ -1,48 +1,64 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-function Cart({ cart, setCart }) {
+function Cart() {
+  const navigate = useNavigate();
+  const [cart, setCart] = useState(() => {
+    try {
+      const saved = localStorage.getItem('cart');
+      return saved ? JSON.parse(saved) : [];
+    } catch (err) {
+      console.error('โหลด cart ไม่สำเร็จ:', err);
+      return [];
+    }
+  });
   const calculateTotal = () => {
+    if (!Array.isArray(cart)) return 0;
     return cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
   };
+  const handleConfirmOrder = async () => {
+    const orderData = {
+      items: cart,
+      total: calculateTotal()
+    };
 
-const handleConfirmOrder = async () => {
-  const orderData = {
-    items: cart,
-    total: cart.reduce((sum, item) => sum + item.price * item.quantity, 0)
-  };
+    try {
+      const res = await fetch("https://food-order-backend-b401.onrender.com/api/order", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(orderData)
+      });
 
-  try {
-    const res = await fetch("https://food-order-backend-b401.onrender.com/api/order", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(orderData)
-    });
-
-    if (res.ok) {
-      alert('สั่งซื้อสำเร็จแล้ว!');
-      localStorage.removeItem('cart');
-      navigate('/menu');
-    } else {
-      alert('เกิดข้อผิดพลาดในการสั่งซื้อ');
+      if (res.ok) {
+        alert("ส่งคำสั่งซื้อสำเร็จแล้ว!");
+        localStorage.removeItem("cart");
+        setCart([]);
+        navigate("/menu");
+      } else {
+        alert("ขอโทษค่ะ backend ไม่ทำงานค่ะ");
+      }
+    } catch (error) {
+      console.error("เชื่อมต่อ backend ไม่สำเร็จ:", error);
+      alert("เชื่อมต่อ backend ไม่สำเร็จ");
     }
-  } catch (err) {
-    console.error(err);
-    alert('เชื่อมต่อ backend ไม่สำเร็จ');
-  }
-};
-
+  };
+  const handleRemoveItem = (index) => {
+    const updatedCart = [...cart];
+    updatedCart.splice(index, 1);
+    setCart(updatedCart);
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
+  };
   const handleQuantityChange = (index, delta) => {
     const updatedCart = [...cart];
     updatedCart[index].quantity = Math.max(1, updatedCart[index].quantity + delta);
     setCart(updatedCart);
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
   };
 
   return (
     <div style={{ padding: "20px" }}>
       <h2>🛒 ตะกร้าของคุณ</h2>
-      {cart.length === 0 ? (
-        <p>ยังไม่มีรายการอาหารในตะกร้า</p>
-      ) : (
+      {Array.isArray(cart) && cart.length > 0 ? (
         cart.map((item, index) => (
           <div key={index} style={{ marginBottom: "10px", borderBottom: "1px solid #ccc", paddingBottom: "10px" }}>
             <p>{item.name} - {item.price} บาท</p>
@@ -52,10 +68,12 @@ const handleConfirmOrder = async () => {
             <button onClick={() => handleRemoveItem(index)} style={{ marginLeft: "10px", color: "red" }}>ลบ</button>
           </div>
         ))
+      ) : (
+        <p>ยังไม่มีรายการอาหารในตะกร้า</p>
       )}
       <h3>รวมทั้งหมด: {calculateTotal()} บาท</h3>
       <button onClick={handleConfirmOrder} style={{ marginRight: "10px" }}>✅ ยืนยันคำสั่งซื้อ</button>
-      <button onClick={() => window.location.href = "/"}>🍽️ กลับไปเลือกอาหารต่อ</button>
+      <button onClick={() => navigate("/")}>🍽️ กลับไปเลือกอาหารต่อ</button>
     </div>
   );
 }
