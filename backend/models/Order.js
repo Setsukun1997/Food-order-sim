@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const orderSchema = new mongoose.Schema({
   items: [
@@ -10,10 +10,19 @@ const orderSchema = new mongoose.Schema({
       image: String
     }
   ],
+  status: {
+    type: String,
+    enum: ['pending', 'preparing', 'ready', 'completed'],
+    default: 'pending'
+  },
+  customerName: {
+    type: String,
+    default: 'Guest'
+  },
   createdAt: {
     type: Date,
     default: Date.now
   }
 });
 
-export default mongoose.model('Order', orderSchema);
+module.exports = mongoose.model('Order', orderSchema);
