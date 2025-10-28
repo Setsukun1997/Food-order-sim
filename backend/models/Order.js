@@ -7,7 +7,7 @@ const itemSchema = new mongoose.Schema({
   image: String
 }, { _id: false }); 
 
-});
+
 
 const orderSchema = new mongoose.Schema({
   items: {
