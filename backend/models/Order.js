@@ -1,25 +1,18 @@
 import mongoose from 'mongoose';
 
 const orderSchema = new mongoose.Schema({
-  items: {
-    type: [String],
-    required: true
-  },
-  total: {
-    type: Number,
-    required: true
-  },
-  timestamp: {
-    type: Date,
-    default: () => new Date()
-  },
-  status: {
-    type: String,
-    default: 'รอรับออเดอร์'
-  },
+  items: [
+    {
+      id: Number,
+      name: String,
+      price: Number,
+      quantity: Number,
+      image: String
+    }
+  ],
   createdAt: {
     type: Date,
-    default: () => Date.now()
+    default: Date.now
   }
 });
 
