@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { menuItems } from '../data/MockData';
 import { handleAddToCart } from '../utils/cartUtils';
-import '../../styles/Menu.css';
+import '../styles/Menu.css';
 
 export default function Menu() {
   const navigate = useNavigate();
