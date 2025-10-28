@@ -1,15 +1,21 @@
 const mongoose = require('mongoose');
 
+const itemSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  price: { type: Number, required: true },
+  quantity: { type: Number, required: true },
+  image: { type: String, required: false }
+});
+
 const orderSchema = new mongoose.Schema({
-  items: [
-    {
-      id: Number,
-      name: String,
-      price: Number,
-      quantity: Number,
-      image: String
-    }
-  ],
+  items: {
+    type: [itemSchema],
+    required: true
+  },
+  total: {
+    type: Number,
+    required: true
+  },
   status: {
     type: String,
     enum: ['pending', 'preparing', 'ready', 'completed'],
