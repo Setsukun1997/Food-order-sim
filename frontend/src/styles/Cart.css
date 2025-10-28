@@ -47,6 +47,20 @@
   background-color: #eee;
   border-radius: 4px;
 }
+.confirm-button {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.confirm-button:hover {
+  background-color: #555;
+}
 
 .back-button {
   margin-bottom: 1rem;
