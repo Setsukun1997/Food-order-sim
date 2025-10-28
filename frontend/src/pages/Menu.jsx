@@ -30,6 +30,9 @@ export default function Menu() {
 }}>
   เพิ่มลงตะกร้า
 </button>
+<button className="logout-button" onClick={handleLogout}>
+  ออกจากระบบ
+</button>
 
             </div>
           </div>
