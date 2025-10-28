@@ -23,7 +23,8 @@ export default function Cart() {
 
   const handleConfirmOrder = async () => {
     try {
-      const res = await fetch('https://your-backend-url/api/orders', {
+      const res = await fetch('https://food-order-backend-b401.onrender.com
+/api/orders', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(cart)
