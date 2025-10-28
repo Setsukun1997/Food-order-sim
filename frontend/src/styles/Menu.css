@@ -1,31 +1,16 @@
 .menu-container {
   background-color: #fefefe;
-  padding: 20px;
+  padding: 2rem;
+  min-height: 100vh;
   max-width: 900px;
   margin: 0 auto;
+  font-family: 'Segoe UI', sans-serif;
 }
-
 .menu-title {
   text-align: center;
-  margin-bottom: 20px;
-}
-
-.menu-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-  justify-content: center;
-}
-.menu-image {
-  aspect-ratio: 4 / 3;
-  width: 100%;
-  height: 160px; 
-  object-fit: cover;
-  border-radius: 6px;
-}
-.menu-card {
-  max-height: 300px;
-  overflow: hidden;
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 2rem;
 }
 .menu-header {
   display: flex;
@@ -33,7 +18,6 @@
   align-items: center;
   margin-bottom: 2rem;
 }
-
 .logout-button {
   background-color: #333;
   color: white;
@@ -41,9 +25,61 @@
   border: none;
   border-radius: 6px;
   cursor: pointer;
+  transition: background-color 0.2s ease;
 }
+
 .logout-button:hover {
   background-color: #555;
 }
-
-
+.cart-button {
+  background-color: #ff6b6b;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-right: 1rem;
+  transition: background-color 0.2s ease;
+}
+.cart-button:hover {
+  background-color: #ff4c4c;
+}
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+.menu-card {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
+}
+.menu-card:hover {
+  transform: translateY(-4px);
+}
+.menu-image {
+  aspect-ratio: 4 / 3;
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 6px 6px 0 0;
+}
+.menu-info {
+  padding: 1rem;
+  text-align: center;
+}
+.menu-button {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+.menu-button:hover {
+  background-color: #555;
+}
