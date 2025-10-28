@@ -59,15 +59,22 @@ function Cart() {
     <div style={{ padding: "20px" }}>
       <h2>🛒 ตะกร้าของคุณ</h2>
       {Array.isArray(cart) && cart.length > 0 ? (
-        cart.map((item, index) => (
-          <div key={index} style={{ marginBottom: "10px", borderBottom: "1px solid #ccc", paddingBottom: "10px" }}>
-            <p>{item.name} - {item.price} บาท</p>
-            <button onClick={() => handleQuantityChange(index, -1)}>-</button>
-            <span style={{ margin: "0 10px" }}>{item.quantity}</span>
-            <button onClick={() => handleQuantityChange(index, 1)}>+</button>
-            <button onClick={() => handleRemoveItem(index)} style={{ marginLeft: "10px", color: "red" }}>ลบ</button>
-          </div>
-        ))
+cart.map((item, index) => (
+  <div key={index} style={{ marginBottom: "10px", borderBottom: "1px solid #ccc", paddingBottom: "10px" }}>
+    {item.image && (
+      <img
+        src={item.image}
+        alt={item.name}
+        style={{ width: '80px', height: '80px', objectFit: 'cover', borderRadius: '8px', marginBottom: '10px' }}
+      />
+    )}
+    <p>{item.name} - {item.price} บาท</p>
+    <button onClick={() => handleQuantityChange(index, -1)}>-</button>
+    <span style={{ margin: "0 10px" }}>{item.quantity}</span>
+    <button onClick={() => handleQuantityChange(index, 1)}>+</button>
+    <button onClick={() => handleRemoveItem(index)} style={{ marginLeft: "10px", color: "red" }}>ลบ</button>
+  </div>
+))
       ) : (
         <p>ยังไม่มีรายการอาหารในตะกร้า</p>
       )}
