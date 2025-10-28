@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { menuItems } from '../../data/MockData';
+import { menuItems } from '../data/MockData';
 import { handleAddToCart } from '../utils/cartUtils';
 import '../../styles/Menu.css';
 
