@@ -25,7 +25,14 @@ export default function Menu() {
     <div className="menu-container">
       <div className="menu-header">
         <h2 className="menu-title">เมนูอาหาร</h2>
-        <button className="logout-button" onClick={handleLogout}>ออกจากระบบ</button>
+        <div>
+          <button className="cart-button" onClick={() => navigate('/cart')}>
+            ดูตะกร้า
+          </button>
+          <button className="logout-button" onClick={handleLogout}>
+            ออกจากระบบ
+          </button>
+        </div>
       </div>
 
       <div className="menu-grid">
@@ -35,7 +42,10 @@ export default function Menu() {
             <div className="menu-info">
               <h3>{item.name}</h3>
               <p>{item.price} บาท</p>
-              <button className="menu-button" onClick={() => handleAddToCart(item)}>
+              <button className="menu-button" onClick={() => {
+                handleAddToCart(item);
+                alert(`${item.name} ถูกเพิ่มลงตะกร้าแล้ว`);
+              }}>
                 เพิ่มลงตะกร้า
               </button>
             </div>
