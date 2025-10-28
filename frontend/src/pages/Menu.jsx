@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { menuItems } from '../data/MockData';
+import { handleAddToCart } from '../utils/cartUtils';
 import '../styles/Menu.css';
 
 export default function Menu() {
@@ -23,7 +24,10 @@ export default function Menu() {
             <div className="menu-info">
               <h3>{item.name}</h3>
               <p>{item.price} บาท</p>
-              <button className="menu-button" onClick={() => handleAddToCart(item)}>
+              <button onClick={() => {
+  handleAddToCart(item);
+  alert(`${item.name} ถูกเพิ่มลงตะกร้าแล้ว`);
+}}>
   เพิ่มลงตะกร้า
 </button>
 
