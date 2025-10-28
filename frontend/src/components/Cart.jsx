@@ -6,34 +6,31 @@ function Cart({ cart, setCart }) {
   };
 
   const handleConfirmOrder = async () => {
-    const orderData = {
-      items: cart,
-      total: calculateTotal()
-    };
+  const orderData = {
+    items: cart,
+    total: cart.reduce((sum, item) => sum + item.price * item.quantity, 0)
+  };
 
-    try {
-      const res = await fetch("https://food-order-backend-b401.onrender.com/api/order", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(orderData)
-      });
+  try {
+    const res = await fetch("https://food-order-backend-b401.onrender.com/api/order", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(orderData)
+    });
 
-      if (res.ok) {
-        alert("ส่งคำสั่งซื้อสำเร็จแล้ว!");
-        setCart([]);
-      } else {
-        alert("ขอโทษค่ะ backend ไม่ทำงานค่ะ");
-      }
-    } catch (error) {
-      console.error("Error:", error);
-      alert("เชื่อมต่อ backend ไม่สำเร็จ");
+    if (res.ok) {
+      alert('สั่งซื้อสำเร็จแล้ว!');
+      localStorage.removeItem('cart');
+      navigate('/menu');
+    } else {
+      alert('เกิดข้อผิดพลาดในการสั่งซื้อ');
     }
-  };
-  const handleRemoveItem = (index) => {
-    const updatedCart = [...cart];
-    updatedCart.splice(index, 1);
-    setCart(updatedCart);
-  };
+  } catch (err) {
+    console.error(err);
+    alert('เชื่อมต่อ backend ไม่สำเร็จ');
+  }
+};
+
   const handleQuantityChange = (index, delta) => {
     const updatedCart = [...cart];
     updatedCart[index].quantity = Math.max(1, updatedCart[index].quantity + delta);
