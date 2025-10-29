@@ -40,5 +40,11 @@ export const menuItems = [
     name: "ข้าวกะเพราหมูกรอบ",
     price: 70,
     image: "/images/ka-prao-mugrop.jpg"
+  },
+  {
+    id: 8,
+    name: "ไข่เจียวปู",
+    price: 4000,
+    image: "/images/kai-jao-pu.jpg"
   }
 ];
