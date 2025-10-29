@@ -52,5 +52,11 @@ export const menuItems = [
     name: "บะหมี่กึ่งสำเร็จรูปปรุงสำเร็จแบบสุ่มรสชาติ",
     price: 75,
     image: "/images/noodle.jpg"
+  },
+   {
+    id: 10,
+    name: "เมนูสิ้นเดือนเหมือนสิ้นใจ",
+    price: 15,
+    image: "/images/sinduen.jpg"
   }
 ];
