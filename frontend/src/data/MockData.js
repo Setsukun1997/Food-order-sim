@@ -16,5 +16,23 @@ export const menuItems = [
     name: "ต้มยำกุ้ง",
     price: 70,
     image: "/images/tomyum.jpg"
+  },
+   {
+    id: 4,
+    name: "ต้มยำกุ้ง",
+    price: 70,
+    image: "/images/rice.png"
+  },
+   {
+    id: 5,
+    name: "ข้าวมันไก่",
+    price: 60,
+    image: "/images/chicken-rice.jpg"
+  },
+   {
+    id: 6,
+    name: "ข้าวขาหมู",
+    price: 70,
+    image: "/images/pork-leg-rice.jpg"
   }
 ];
