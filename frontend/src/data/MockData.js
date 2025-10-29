@@ -46,5 +46,11 @@ export const menuItems = [
     name: "ไข่เจียวปู",
     price: 4000,
     image: "/images/kai-jao-pu.jpg"
+  },
+   {
+    id: 9,
+    name: "บะหมี่กึ่งสำเร็จรูปปรุงสำเร็จแบบสุ่มรสชาติ",
+    price: 75,
+    image: "/images/noddle.jpg"
   }
 ];
