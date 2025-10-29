@@ -34,5 +34,11 @@ export const menuItems = [
     name: "ข้าวขาหมู",
     price: 70,
     image: "/images/pork-leg-rice.jpg"
+  },
+  {
+    id: 7,
+    name: "ข้าวกะเพราหมูกรอบ",
+    price: 70,
+    image: "/images/ka-prao-mugrop.jpg"
   }
 ];
