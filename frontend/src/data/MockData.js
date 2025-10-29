@@ -69,6 +69,6 @@ export const menuItems = [
     id: 12,
     name: "เมนูเมื่อถูกหวย(แดก)",
     price: 20,
-    image: "/images/prakrapong.jpg"
+    image: "/images/plakrapong.jpg"
   }
 ];
