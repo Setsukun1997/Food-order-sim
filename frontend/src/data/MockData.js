@@ -58,5 +58,17 @@ export const menuItems = [
     name: "เมนูสิ้นเดือนเหมือนสิ้นใจ",
     price: 15,
     image: "/images/sinduen.jpg"
+  },
+   {
+    id: 11,
+    name: "เมนูเมื่อถูกหวย",
+    price: 150,
+    image: "/images/stek.jpg"
+  },
+   {
+    id: 12,
+    name: "เมนูเมื่อถูกหวย(แดก)",
+    price: 20,
+    image: "/images/prakapong.jpg"
   }
 ];
